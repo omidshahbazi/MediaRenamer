@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -35,6 +36,22 @@ namespace MediaRenamer
 				Console.WriteLine((i + 1) / (float)directories.Length * 100 + "% Renamed");
 			}
 		}
+
+		//static void Main(string[] args)
+		//{
+		//	string path1 = @"F:\To Backup\#Movies";
+		//	string path2 = @"H:\Movies";
+		//	string[] duplicates = FindDuplicate(path1, path2);
+
+		//	for (int i = 0; i < duplicates.Length; ++i)
+		//		Console.WriteLine(duplicates[i]);
+
+		//	Console.WriteLine("Ready to Delete from [" + path1 + "] ?");
+		//	Console.ReadLine();
+
+		//	for (int i = 0; i < duplicates.Length; ++i)
+		//		Directory.Delete(path1 + "/" + duplicates[i]);
+		//}
 
 		private static string FindName(string Name)
 		{
@@ -76,6 +93,25 @@ namespace MediaRenamer
 			result = "[" + result.Substring(index + 1, closeIndex - index - 1) + "] " + result.Substring(0, index - 1);
 
 			return result;
+		}
+
+		private static string[] FindDuplicate(string Path1, string Path2)
+		{
+			string[] directories1 = Directory.GetDirectories(Path1);
+			string[] directories2 = Directory.GetDirectories(Path2);
+
+			List<string> names = new List<string>();
+
+			for (int i = 0; i < directories1.Length; ++i)
+			{
+				string directoryName = Path.GetFileName(directories1[i]);
+
+				for (int j = 0; j < directories2.Length; ++j)
+					if (Path.GetFileName(directories2[j]) == directoryName)
+						names.Add(directoryName);
+			}
+
+			return names.ToArray();
 		}
 	}
 }

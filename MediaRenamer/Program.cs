@@ -9,8 +9,8 @@ namespace MediaRenamer
 	{
 		static void Main(string[] args)
 		{
-			//string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			string path = @"F:\del hdd\delaram movies\Film\English";
+			string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			//string path = @"F:\del hdd\delaram movies\Film\New folder";
 
 			string[] directories = Directory.GetDirectories(path);
 
